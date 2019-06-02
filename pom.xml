@@ -6,7 +6,7 @@
 	 <groupId>com.baeldung</groupId>
     <version>0.0.1</version>
     <name>spring-boot-angular-ecommerce</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>Spring Boot Angular E-commerce Appliciation</description>
 	
 
