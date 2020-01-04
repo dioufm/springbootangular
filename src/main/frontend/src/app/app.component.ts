@@ -1,12 +1,10 @@
-import {Component} from '@angular/core';
-import {EcommerceService} from "./ecommerce/services/EcommerceService";
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    providers: [EcommerceService]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  title = 'DmWeb solution';
 }

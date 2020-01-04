@@ -1,31 +1,42 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
-import {AppComponent} from './app.component';
-import {EcommerceComponent} from './ecommerce/ecommerce.component';
-import {ProductsComponent} from './ecommerce/products/products.component';
-import {ShoppingCartComponent} from './ecommerce/shopping-cart/shopping-cart.component';
-import {OrdersComponent} from './ecommerce/orders/orders.component';
-import {EcommerceService} from "./ecommerce/services/EcommerceService";
+import { AppComponent } from './app.component';
+
+import { AppRoutingModule } from './app-routing.module';
+import { NotFoundComponent } from './modules/general/not-found/not-found.component';
+import { HomeComponent } from './modules/general/home/home.component';
+import { HeaderModule } from './components/header/header.module';
+
+import { ConfigService } from './services/config/config.service';
+import { ReportModule } from './modules/application/report/report.module';
+import { FooterModule } from './components/footer/footer.module';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material';
+
+
+
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        EcommerceComponent,
-        ProductsComponent,
-        ShoppingCartComponent,
-        OrdersComponent
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule
-    ],
-    providers: [EcommerceService],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    NotFoundComponent,
+  ],
+  imports: [
+    BrowserAnimationsModule,
+    MatButtonModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    HeaderModule,
+    FooterModule,
+    ReportModule
+  ],
+  providers: [
+    ConfigService,
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

@@ -1,0 +1,401 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 50px; color:#007bff">Loading...</p>
+</ngx-spinner>
+
+<header class="masthead text-white text-center">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <form class="form-contact contact_form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+          novalidate id="contactForm">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control form-control-lg focus" name="url" [(ngModel)]="form.url"
+              #url="ngModel" placeholder="ex. http://mon.siteweb.fr" required />
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-block btn-lg btn-primary">ANALYSER MA PAGE</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container" id="rapport">
+  <div class="col mt-4">
+    <!--================ NEW SECTION URl=================-->
+    <div class="card">
+
+
+      <div class="col" *ngIf="report && report.listOfRules">
+
+        <span>Rapport audit
+          <a class="fn" rel="nofollow noreferrer noopener" target="_blank" title="{{report.urlwebsite}}"
+            data-url="report.urlwebsite" href="{{report.urlwebsite}}">
+            <span class="domain">{{report.urlwebsite}}</span>
+          </a>
+        </span> -
+        <span>{{report.dateReport | date: 'dd MMMM yyyy HH:mm:ss'}}</span>
+
+        <img *ngIf="report.imageDesktop !== null" src="{{report.imageDesktop}}" height="42" width="42">
+
+        <div class="card border-secondary mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <!-- correct-->
+                <div class="row">
+                  <div class="col-lg-6">
+                    <span style="color: green;">
+                      <i class="fas fa-check-circle"></i>
+                    </span>
+                    Correct
+                  </div>
+                  <div class="col-lg-6">
+                    <progress-bar [progress]="report.percentNbRuleSucces" [color]="'#5cb85c'">
+                    </progress-bar>
+                  </div>
+                </div>
+
+                <!-- A ameliorer-->
+                <div class="row">
+                  <div class="col-lg-6">
+                    <span class="progress-label">
+                      <span style="color: yellow;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                      </span>A améliorer
+                    </span>
+
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="progress-container">
+                      <progress-bar [progress]="report.percentNbRuleWarning" [color]="'#f0ad4e'">
+                      </progress-bar>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Erreurs-->
+                <div class="row">
+                  <div class="col-lg-6">
+                    <span style="color: red;">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </span>Erreurs
+
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="progress-container">
+                      <progress-bar [progress]="report.percentNbRuleError" [color]="'#f65960'">
+                      </progress-bar>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+
+                <circle-progress [percent]="report.score" [radius]="70" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+                  [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true"
+                  [animationDuration]="300">
+                </circle-progress>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- shared button-->
+        <!-- export pdf and comemrcial actions-->
+        <div class="card border-secondary mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-2">
+                <button (click)="captureScreen()" class="btn btn-block btn-md btn-primary">Telecharger le rapport en
+                  PDF</button>
+              </div>
+              <div class="col-lg-2">
+                <button (click)="captureScreen()" class="btn btn-block btn-md btn-primary">Partagez le rapport
+                  Twitetr</button>
+              </div>
+              <div class="col-lg-2">
+                <button (click)="captureScreen()" class="btn btn-block btn-md btn-primary">Partagez le rapport
+                  FB</button>
+              </div>
+              <div class="col-lg-2">
+                <button (click)="captureScreen()" class="btn btn-block btn-md btn-primary">Partagez sur
+                  INsragram</button>
+              </div>
+              <div class="col-lg-2">
+                <button (click)="captureScreen()" class="btn btn-block btn-md btn-primary">Partagez le rapport
+                  google</button>
+              </div>
+              <div class="col-lg-2">
+                <button (click)="captureScreen()" class="btn btn-block btn-md btn-primary">Partagez sur
+                  whatsapp</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- export pdf and comemrcial actions-->
+        <div class="card border-secondary mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li>
+                    Optimisez {{report.urlwebsite}}
+                  </li>
+                  <li>
+                    Vos rapports sont automatiquement actualisés tous les jours
+                  </li>
+                  <li>
+                    Suivez le ranking de vos mots clés sur les moteurs de recherche
+                  </li>
+                  <li>
+                    Recevez un rapport hebdomadaire par email
+                  </li>
+
+                </ul>
+
+              </div>
+              <div class="col-lg-6">
+                <button (click)="captureScreen()" class="btn btn-block btn-md btn-info">
+                  Tester gratuitement nos services pendant 14 jours </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-secondary mb-3">
+          <mat-tab-group>
+            <mat-tab *ngFor="let rule of report.listOfRules; let index = index">
+              <ng-template mat-tab-label>
+                <!--
+                <mat-icon *ngIf="rule.label =='Balise Titre'" class="icons.color_green">home</mat-icon>
+                <mat-icon *ngIf="rule.label =='Meta Description'" class="icons.color_blue">description</mat-icon>
+                -->
+                {{rule.label}}
+                <mat-icon *ngIf="rule.codeError == 'SUCCESS'" class="success">
+                  <i class="fas fa-check-circle success"></i>
+                </mat-icon>
+                <mat-icon *ngIf="rule.codeError == 'WARNING'" class="warning">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </mat-icon>
+                <mat-icon *ngIf="rule.codeError == 'ERROR'" class="error">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </mat-icon>
+              </ng-template>
+              <div class="float-left offer-content"
+                *ngIf="rule.label == 'Balise Titre' || rule.label == 'Meta Description'">
+                <br>
+                <table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <!-- sucess-->
+                        <div class="btn-group-vertical success" role="group" aria-label="Large button group"
+                          *ngIf="rule.codeError == 'SUCCESS'">
+                          <button type="button" class="btn btn-default">
+                            <span class="progress-label">
+                              <span class="warning">
+                                <i class="fas fa-check-circle success"></i>
+                              </span>
+                            </span>
+                          </button>
+                          <button type="button" class="btn btn-default success">Bravo !</button>
+                        </div>
+                        <!-- warning-->
+                        <div class="btn-group-vertical warning" role="group" aria-label="Large button group"
+                          *ngIf="rule.codeError == 'WARNING'">
+                          <button type="button" class="btn btn-default">
+                            <span class="progress-label">
+                              <span class="warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                              </span><br>
+                              <span>
+                                Impact majeur
+                              </span>
+                            </span>
+                          </button>
+                          <button type="button" class="btn btn-secondary warning">Facile à corriger</button>
+                        </div>
+                        <!-- error-->
+                        <div class="btn-group-vertical error" role="group" aria-label="Large button group"
+                          *ngIf="rule.codeError == 'ERROR'">
+                          <button type="button" class="btn btn-default">
+                            <span class="progress-label">
+                              <span class="error">
+                                <i class="fas fa-exclamation-triangle"></i>
+                              </span><br>
+                              <span>
+                                Impact majeur
+                              </span>
+                            </span>
+                          </button>
+                          <button type="button" class="btn btn-secondary error">Facile à corriger</button>
+                        </div>
+                      </td>
+                      <td>
+                        <div [innerHTML]="rule.value"></div>
+                        <strong>
+                          <div [innerHTML]="rule.labelError"></div>
+                        </strong>
+                        <div *ngIf="rule.codeError == 'SUCCESS'"
+                          class="mt-1 alert alert-success alert-dismissible fade show" role="alert">
+                          <span class="font-weight-bold" [innerHTML]="rule.ruleDescription"></span>
+                        </div>
+                        <div *ngIf="rule.codeError == 'WARNING'"
+                          class="mt-1 alert alert-warning alert-dismissible fade show" role="alert">
+                          <span class="font-weight-bold" [innerHTML]="rule.ruleDescription"></span>
+                        </div>
+                        <div *ngIf="rule.codeError == 'ERROR'"
+                          class="mt-1 alert alert-danger alert-dismissible fade show" role="alert">
+                          <span class="font-weight-bold" [innerHTML]="rule.ruleDescription"></span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- balises-->
+              <mat-tab-group *ngIf="rule.label == 'Balises'">
+                <mat-tab *ngFor="let tagAnalyse of report.listTagAnalyse; let index = index">
+                  <ng-template mat-tab-label>
+
+                    {{tagAnalyse.tagName}}
+
+                  </ng-template>
+
+                  <div class="float-center align-items-center text-center">
+                    <div *ngIf="rule.codeError == 'SUCCESS'"
+                      class="mt-1 alert alert-success alert-dismissible fade show" role="alert">
+                      <span class="font-weight-bold" [innerHTML]="report.tagRuleMessage.message"></span>
+                    </div>
+                    <div *ngIf="rule.codeError == 'WARNING'"
+                      class="mt-1 alert alert-warning alert-dismissible fade show" role="alert">
+                      <span class="font-weight-bold" [innerHTML]="report.tagRuleMessage.message"></span>
+                    </div>
+                    <div *ngIf="rule.codeError == 'ERROR'" class="mt-1 alert alert-danger alert-dismissible fade show"
+                      role="alert">
+                      <span class="font-weight-bold" [innerHTML]="report.tagRuleMessage.message"></span>
+                    </div>
+                  </div>
+                  <div class="float-center align-items-center text-center">
+                    <table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
+                      <tbody>
+                        <tr *ngFor="let shortList of tagAnalyse.listTag">
+                          <span>{{shortList}}</span>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+
+              <!-- analyses mot-->
+              <div class="float-center align-items-center text-center" *ngIf="rule.label == 'Analyses de mots'">
+                <div>
+                  <div *ngIf="rule.codeError == 'SUCCESS'" class="mt-1 alert alert-success alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.wordOccurenceMessage.message"></span>
+                  </div>
+                  <div *ngIf="rule.codeError == 'WARNING'" class="mt-1 alert alert-warning alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.wordOccurenceMessage.message"></span>
+                  </div>
+                  <div *ngIf="rule.codeError == 'ERROR'" class="mt-1 alert alert-danger alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.wordOccurenceMessage.message"></span>
+                  </div>
+                </div>
+                <!-- rule Tag-->
+                <aside class="tag_cloud_widget">
+                  <ul class="list">
+                    <li *ngFor="let word of report.words">
+                      <a>{{word.word}} (<strong>{{word.count}}</strong>)</a>
+                    </li>
+                  </ul>
+                </aside>
+                <!--
+                <angular-tag-cloud [data]="wordCloudDatas" [width]="options.width" [height]="options.height"
+                  [overflow]="options.overflow">
+                </angular-tag-cloud>
+                -->
+
+              </div>
+
+              <!-- analyses pages-->
+              <div class="float-center align-items-center text-center" *ngIf="rule.label == 'Analyse des pages'">
+                <!-- rule Tag-->
+                <div>
+                  <div *ngIf="rule.codeError == 'SUCCESS'" class="mt-1 alert alert-success alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.pageMessage.message"></span>
+                  </div>
+                  <div *ngIf="rule.codeError == 'WARNING'" class="mt-1 alert alert-warning alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.pageMessage.message"></span>
+                  </div>
+                  <div *ngIf="rule.codeError == 'ERROR'" class="mt-1 alert alert-danger alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.pageMessage.message"></span>
+                  </div>
+                </div>
+
+                <table class="table table-hover table-striped table-bordered table-responsive-md table-sm text-center">
+                  <th>
+                    Text encre
+                  </th>
+                  <th>
+                    Type
+                  </th>
+                  <tbody>
+                    <tr *ngFor="let page of report.pagesList">
+                      <td>
+                        <a href="{{page.url}}">{{page.encre}}</a>
+                      </td>
+                      <td>
+                        {{page.type}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+
+              <!-- sitemap-->
+              <div class="float-center align-items-center text-center" *ngIf="rule.label == 'Site Map'">
+                <!-- rule Tag-->
+                <div>
+                  <div *ngIf="rule.codeError == 'SUCCESS'" class="mt-1 alert alert-success alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.siteMapMessage.message"></span>
+                  </div>
+                  <div *ngIf="rule.codeError == 'WARNING'" class="mt-1 alert alert-warning alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.siteMapMessage.message"></span>
+                  </div>
+                  <div *ngIf="rule.codeError == 'ERROR'" class="mt-1 alert alert-danger alert-dismissible fade show"
+                    role="alert">
+                    <span class="font-weight-bold" [innerHTML]="report.siteMapMessage.message"></span>
+                  </div>
+                </div>
+
+                <a *ngIf="rule.codeError != 'ERROR'" href="{{report.domaine}}/sitemap.xml">Voir le site Map</a>
+
+              </div>
+
+
+              <!-- <div class="iframe-container">
+                <iframe width="375" height="559" src="http://plombier.tarif.pro" frameborder="0"></iframe>
+              </div> -->
+
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
